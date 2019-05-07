@@ -3,6 +3,7 @@ package com.alg.heap;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -16,57 +17,33 @@ public class Scoville {
 	 * Leo는 모든 음식의 스코빌 지수가 K 이상이 될 때까지 반복하여 섞습니다. 
 	 * Leo가 가진 음식의 스코빌 지수를 담은 배열 scoville과 원하는 스코빌 지수 K가 주어질 때, 모든 음식의 스코빌 지수를
 	 * K 이상으로 만들기 위해 섞어야 하는 최소 횟수를 return 하도록 solution 함수를 작성해주세요.  
+	 * 
+	 * 제한 사항
+			scoville의 길이는 1 이상 1,000,000 이하입니다.
+			K는 0 이상 1,000,000,000 이하입니다.
+			scoville의 원소는 각각 0 이상 1,000,000 이하입니다.
+			모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return 합니다.
 	 */
-	public int solution(int[] scoville, int k) {
+	public int solution(int[] scoville, int K) {
         int answer = 0;
 
-        LinkedList<Integer> scovilleList = Arrays.stream(scoville)
-        								.boxed()
-        								.collect(Collectors.toCollection(LinkedList::new));
-       
-        int index = 0;
+        PriorityQueue<Integer> scovilleList = new PriorityQueue<>();
+
+        for(int index = 0; index < scoville.length; index++) {
+        	scovilleList.add(scoville[index]);
+        }
         
-        while(true) {
-        	Collections.sort(scovilleList);
-        	int secondIndex = index+1 > scovilleList.size() ? scovilleList.size() : index+1;
-        			
-        	int first = scovilleList.get(index);
-        	int second = scovilleList.get(secondIndex);
+        while(scovilleList.size() > 1 && scovilleList.peek() < K) {
         	
-        	if(k <= first) break; 
-        		
+        	int first = scovilleList.poll();
+        	int second = scovilleList.poll();
+        	
         	int result = first + (second * 2);
-        	scovilleList.removeFirst();
-        	scovilleList.removeFirst();
-        	scovilleList.add(0, result);
-        	
+        	scovilleList.add(result);
+
         	answer++;
         }
         
-        return answer;
+        return scovilleList.peek() > K ? answer : -1;
     }
-	
-	@Test
-	public void test1() {
-		
-		int[] scovilleArray = {1, 2, 3, 9, 10, 12}; 
-		int k = 7;
-		
-		Scoville scoville = new Scoville();
-		int result = scoville.solution(scovilleArray, k);
-		
-		System.out.println(result);
-	}
-	
-	@Test
-	public void test2() {
-		
-		int[] scovilleArray = {11, 12, 33, 49, 10, 12}; 
-		int k = 7;
-		
-		Scoville scoville = new Scoville();
-		int result = scoville.solution(scovilleArray, k);
-		
-		System.out.println(result);
-	}
 }
