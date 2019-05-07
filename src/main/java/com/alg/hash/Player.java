@@ -1,17 +1,23 @@
 package com.alg.hash;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+
+import junit.framework.Assert;
 
 public class Player {
 
 	public String solution(String[] participant, String[] completion) {
         
 		if(participant == null || completion == null) {
-			return "none";
+			return "";
 		}
 		
         LinkedList<String> array = new LinkedList<String>(Arrays.asList(participant));
@@ -26,7 +32,42 @@ public class Player {
         return Optional.ofNullable(array)
         			.filter(arr -> arr.size() > 0)
         			.map(LinkedList::getFirst)
-        			.orElse("none");
+        			.orElse("");
+    }
+
+	/*
+	 * 코딩테스트 연습 > 해시 > 완주하지 못한 선수
+	 * 코딩 테스트 통과 코드 
+	 * */
+	public String solutionHash(String[] participant, String[] completion) {
+        
+		if(participant == null || completion == null) {
+			return "";
+		}
+		
+		Map<String, Integer> partMap = new HashMap<String, Integer>();
+		for(String part : participant) {
+			int value = Optional.ofNullable(partMap.get(part)).orElse(-1);			
+			partMap.put(part, value+ 1);
+		}
+
+		
+        for(String comp : completion) {
+        	
+        	if(partMap.get(comp) == 0) {        		
+        		partMap.remove(comp);
+        		continue;
+        	}
+        	
+        	partMap.put(comp, partMap.get(comp) - 1);	
+        }
+        
+        return partMap.keySet()
+        		.stream()
+        		.filter(keys -> keys.length() > 0)
+        		.findFirst()
+        		.orElse("");
+        		        		
     }
 	
 	@Test
@@ -35,9 +76,10 @@ public class Player {
 		String[] completion = new String[] {"eden", "kiki"};
 		
 		Player solution = new Player();
-		String result = solution.solution(participant, completion);
-		
-		System.out.println(result);
+		String result1 = solution.solution(participant, completion);
+		String result2 = solution.solutionHash(participant, completion);
+
+		assertEquals(result1, result2);		
 	}
 	
 	@Test
@@ -46,9 +88,10 @@ public class Player {
 		String[] completion = new String[] {"josipa", "filipa", "marina", "nikola"};
 		
 		Player solution = new Player();
-		String result = solution.solution(participant, completion);
-		
-		System.out.println(result);
+		String result1 = solution.solution(participant, completion);
+		String result2 = solution.solutionHash(participant, completion);
+
+		assertEquals(result1, result2);	
 	}
 	
 	@Test
@@ -57,9 +100,10 @@ public class Player {
 		String[] completion = new String[] {"stanko", "ana", "mislav"};
 		
 		Player solution = new Player();
-		String result = solution.solution(participant, completion);
-		
-		System.out.println(result);
+		String result1 = solution.solution(participant, completion);
+		String result2 = solution.solutionHash(participant, completion);
+
+		assertEquals(result1, result2);	
 	}
 	
 	@Test
@@ -68,8 +112,9 @@ public class Player {
 		String[] completion = null;
 		
 		Player solution = new Player();
-		String result = solution.solution(participant, completion);
-		
-		System.out.println(result);
+		String result1 = solution.solution(participant, completion);
+		String result2 = solution.solutionHash(participant, completion);
+
+		assertEquals(result1, result2);	
 	}
 }
