@@ -10,8 +10,6 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import junit.framework.Assert;
-
 public class Player {
 
 	public String solution(String[] participant, String[] completion) {
