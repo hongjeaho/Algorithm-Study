@@ -43,9 +43,6 @@ public class Scoville {
         	answer++;
         }
         
-        System.out.println(scovilleList);
-        
-        
         return answer;
     }
 	
@@ -53,6 +50,18 @@ public class Scoville {
 	public void test1() {
 		
 		int[] scovilleArray = {1, 2, 3, 9, 10, 12}; 
+		int k = 7;
+		
+		Scoville scoville = new Scoville();
+		int result = scoville.solution(scovilleArray, k);
+		
+		System.out.println(result);
+	}
+	
+	@Test
+	public void test2() {
+		
+		int[] scovilleArray = {11, 12, 33, 49, 10, 12}; 
 		int k = 7;
 		
 		Scoville scoville = new Scoville();
