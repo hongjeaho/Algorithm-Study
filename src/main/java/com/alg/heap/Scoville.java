@@ -1,12 +1,6 @@
 package com.alg.heap;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.stream.Collectors;
-
-import org.junit.Test;
 
 public class Scoville {
 	/*
