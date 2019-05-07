@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-public class Solution {
+public class Player {
 
 	public String solution(String[] participant, String[] completion) {
         
@@ -34,7 +34,7 @@ public class Solution {
 		String[] participant = new String[] {"leo", "kiki", "eden"};
 		String[] completion = new String[] {"eden", "kiki"};
 		
-		Solution solution = new Solution();
+		Player solution = new Player();
 		String result = solution.solution(participant, completion);
 		
 		System.out.println(result);
@@ -45,7 +45,7 @@ public class Solution {
 		String[] participant = new String[] {"marina", "josipa", "nikola", "vinko", "filipa"};
 		String[] completion = new String[] {"josipa", "filipa", "marina", "nikola"};
 		
-		Solution solution = new Solution();
+		Player solution = new Player();
 		String result = solution.solution(participant, completion);
 		
 		System.out.println(result);
@@ -56,7 +56,7 @@ public class Solution {
 		String[] participant = new String[] {"mislav", "stanko", "mislav", "ana"};
 		String[] completion = new String[] {"stanko", "ana", "mislav"};
 		
-		Solution solution = new Solution();
+		Player solution = new Player();
 		String result = solution.solution(participant, completion);
 		
 		System.out.println(result);
@@ -67,7 +67,7 @@ public class Solution {
 		String[] participant = null;
 		String[] completion = null;
 		
-		Solution solution = new Solution();
+		Player solution = new Player();
 		String result = solution.solution(participant, completion);
 		
 		System.out.println(result);
